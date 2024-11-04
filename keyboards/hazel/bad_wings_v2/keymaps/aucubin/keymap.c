@@ -7,6 +7,16 @@ enum layers {
     _NAV
 };
 
+enum combos {
+    COMBO_CAPS_WORD
+};
+
+const uint16_t PROGMEM combo_caps_word[] = {KC_G, KC_M, COMBO_END};
+
+combo_t key_combos[] = {
+    COMBO(combo_caps_word, CW_TOGG)
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT_split_3x5_3(
   //,----------------+----------------+----------------+----------------+----------------+----------------.                                     ,----------------+----------------+----------------+----------------+----------------+----------------.
