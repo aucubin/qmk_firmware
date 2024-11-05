@@ -7,6 +7,28 @@ enum layers {
     _NAV
 };
 
+enum custom_keycodes {
+    MACRO_UMLAUT = SAFE_RANGE,
+    MACRO_ESZETT
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch(keycode) {
+        case MACRO_UMLAUT: {
+            if(record->event.pressed) {
+                SEND_STRING(SS_LALT("u"));
+            }
+            break;
+        }
+        case MACRO_ESZETT: {
+            if(record->event.pressed) {
+                SEND_STRING(SS_LALT("s"));
+            }
+            break;
+        }
+    }
+    return true;
+};
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT_split_3x5_3(
   //,----------------+----------------+----------------+----------------+----------------+----------------.                                     ,----------------+----------------+----------------+----------------+----------------+----------------.
@@ -27,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----------------+----------------+----------------+----------------+----------------+----------------|                                     |----------------+----------------+----------------+----------------+----------------+----------------|
              KC_GRAVE,  LSFT(KC_GRAVE),  LSFT(KC_MINUS),        KC_EQUAL,         KC_BTN2,                                               KC_LBRC,   LSFT(KC_LBRC),      LSFT(KC_9),         XXXXXXX,         KC_BSLS,
   //|----------------+----------------+----------------+----------------+----------------+----------------|                                     |----------------+----------------+----------------+----------------+----------------+----------------|
-              XXXXXXX,         XXXXXXX,  LSFT(KC_EQUAL),        KC_MINUS,         KC_BTN3,                                               XXXXXXX,         XXXXXXX,   LSFT(KC_SCLN),         XXXXXXX,        KC_QUOTE,
+              XXXXXXX,         XXXXXXX,  LSFT(KC_EQUAL),        KC_MINUS,         KC_BTN3,                                               MACRO_UMLAUT,         MACRO_ESZETT,   LSFT(KC_SCLN),         XXXXXXX,        KC_QUOTE,
   //`----------------+----------------+----------------+----------------+----------------+----------------+----------------.   ,----------------+----------------+----------------+----------------+----------------+----------------+----------------'
                                                                                   _______,         _______,         _______,             _______,         _______,         _______
   //                                                                    `----------------+----------------+----------------'   `----------------+----------------+----------------'
