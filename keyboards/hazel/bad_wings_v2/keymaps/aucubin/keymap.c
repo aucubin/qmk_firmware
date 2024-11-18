@@ -29,6 +29,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 };
+
+const uint16_t PROGMEM zoom_in[] = {KC_Q, KC_W, COMBO_END};
+const uint16_t PROGMEM zoom_out[] = {KC_W, KC_F, COMBO_END};
+combo_t key_combos[] = {
+    COMBO(zoom_in, LGUI(KC_EQUAL)),
+    COMBO(zoom_out, LGUI(KC_MINUS))
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT_split_3x5_3(
   //,----------------+----------------+----------------+----------------+----------------+----------------.                                     ,----------------+----------------+----------------+----------------+----------------+----------------.
