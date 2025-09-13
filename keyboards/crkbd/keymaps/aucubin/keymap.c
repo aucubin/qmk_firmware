@@ -197,16 +197,27 @@ bool oled_task_user(void) {
 #endif // OLED_ENABLE
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    os_variant_t detected_os = detected_host_os();
     switch(keycode) {
         case MACRO_UMLAUT: {
             if(record->event.pressed) {
-                SEND_STRING(SS_LALT("u"));
+                if(detected_os == OS_MACOS){
+                    SEND_STRING(SS_LALT("u"));
+                }
+                else {
+                    SEND_STRING(SS_LSFT(SS_RALT("\"")));
+                }
             }
             break;
         }
         case MACRO_ESZETT: {
             if(record->event.pressed) {
-                SEND_STRING(SS_LALT("s"));
+                if(detected_os == OS_MACOS){
+                    SEND_STRING(SS_LALT("s"));
+                }
+                else{
+                    SEND_STRING(SS_RALT("s"));
+                }
             }
             break;
         }

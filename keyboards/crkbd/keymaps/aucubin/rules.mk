@@ -5,3 +5,4 @@ WPM_ENABLE=yes
 RGBLIGHT_ENABLE     = no
 OLED_ENABLE         = yes
 OLED_DRIVER         = ssd1306
+OS_DETECTION_ENABLE = yes
