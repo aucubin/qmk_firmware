@@ -13,16 +13,27 @@ enum custom_keycodes {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    os_variant_t detected_os = detected_host_os();
     switch(keycode) {
         case MACRO_UMLAUT: {
             if(record->event.pressed) {
-                SEND_STRING(SS_LALT("u"));
+                if(detected_os == OS_MACOS){
+                    SEND_STRING(SS_LALT("u"));
+                }
+                else {
+                    SEND_STRING(SS_LSFT(SS_RALT("\"")));
+                }
             }
             break;
         }
         case MACRO_ESZETT: {
             if(record->event.pressed) {
-                SEND_STRING(SS_LALT("s"));
+                if(detected_os == OS_MACOS){
+                    SEND_STRING(SS_LALT("s"));
+                }
+                else{
+                    SEND_STRING(SS_RALT("s"));
+                }
             }
             break;
         }
@@ -55,9 +66,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,----------------+----------------+----------------+----------------+----------------+----------------.                                     ,----------------+----------------+----------------+----------------+----------------+----------------.
               XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,                                               KC_RBRC,   LSFT(KC_RBRC),      LSFT(KC_0),         XXXXXXX,   LSFT(KC_BSLS),
   //|----------------+----------------+----------------+----------------+----------------+----------------|                                     |----------------+----------------+----------------+----------------+----------------+----------------|
-             KC_GRAVE,  LSFT(KC_GRAVE),  LSFT(KC_MINUS),        KC_EQUAL,         KC_BTN2,                                               KC_LBRC,   LSFT(KC_LBRC),      LSFT(KC_9),         XXXXXXX,         KC_BSLS,
+             KC_GRAVE,  LSFT(KC_GRAVE),  LSFT(KC_MINUS),        KC_EQUAL,         MS_BTN2,                                               KC_LBRC,   LSFT(KC_LBRC),      LSFT(KC_9),         XXXXXXX,         KC_BSLS,
   //|----------------+----------------+----------------+----------------+----------------+----------------|                                     |----------------+----------------+----------------+----------------+----------------+----------------|
-              XXXXXXX,         XXXXXXX,  LSFT(KC_EQUAL),        KC_MINUS,         KC_BTN3,                                               MACRO_UMLAUT,         MACRO_ESZETT,   LSFT(KC_SCLN),         LSFT(KC_QUOTE),        KC_QUOTE,
+              XXXXXXX,         XXXXXXX,  LSFT(KC_EQUAL),        KC_MINUS,         MS_BTN3,                                               MACRO_UMLAUT,         MACRO_ESZETT,   LSFT(KC_SCLN),         LSFT(KC_QUOTE),        KC_QUOTE,
   //`----------------+----------------+----------------+----------------+----------------+----------------+----------------.   ,----------------+----------------+----------------+----------------+----------------+----------------+----------------'
                                                                                   _______,         _______,         _______,             _______,         _______,         _______
   //                                                                    `----------------+----------------+----------------'   `----------------+----------------+----------------'
