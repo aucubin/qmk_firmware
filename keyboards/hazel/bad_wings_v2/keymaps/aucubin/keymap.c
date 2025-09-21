@@ -20,7 +20,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if(detected_os == OS_LINUX || detected_os == OS_WINDOWS){
                     SEND_STRING(SS_LSFT(SS_RALT("\"")));
                 }
-                else{
+                else if(detected_os == OS_MACOS || detected_os == OS_IOS){
                     SEND_STRING(SS_LALT("u"));
                 }
             }
@@ -31,7 +31,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if(detected_os == OS_LINUX || detected_os == OS_WINDOWS){
                     SEND_STRING(SS_RALT("s"));
                 }
-                else{
+                else if(detected_os == OS_MACOS || detected_os == OS_IOS){
                     SEND_STRING(SS_LALT("s"));
                 }
             }
