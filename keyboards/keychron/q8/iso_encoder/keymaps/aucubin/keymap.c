@@ -94,22 +94,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch(keycode) {
         case MACRO_UMLAUT: {
             if(record->event.pressed) {
-                if(detected_os == OS_MACOS){
-                    SEND_STRING(SS_LALT("u"));
-                }
-                else {
+                if(detected_os == OS_LINUX || detected_os == OS_WINDOWS){
                     SEND_STRING(SS_LSFT(SS_RALT("\"")));
+                }
+                else if(detected_os == OS_MACOS || detected_os == OS_IOS){
+                    SEND_STRING(SS_LALT("u"));
                 }
             }
             break;
         }
         case MACRO_ESZETT: {
             if(record->event.pressed) {
-                if(detected_os == OS_MACOS){
-                    SEND_STRING(SS_LALT("s"));
-                }
-                else{
+                if(detected_os == OS_LINUX || detected_os == OS_WINDOWS){
                     SEND_STRING(SS_RALT("s"));
+                }
+                else if(detected_os == OS_MACOS || detected_os == OS_IOS){
+                    SEND_STRING(SS_LALT("s"));
                 }
             }
             break;
