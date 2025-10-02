@@ -13,16 +13,27 @@ enum custom_keycodes {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    os_variant_t detected_os = detected_host_os();
     switch(keycode) {
         case MACRO_UMLAUT: {
             if(record->event.pressed) {
-                SEND_STRING(SS_LALT("u"));
+                if(detected_os == OS_LINUX || detected_os == OS_WINDOWS){
+                    SEND_STRING(SS_LSFT(SS_RALT("\"")));
+                }
+                else if(detected_os == OS_MACOS || detected_os == OS_IOS){
+                    SEND_STRING(SS_LALT("u"));
+                }
             }
             break;
         }
         case MACRO_ESZETT: {
             if(record->event.pressed) {
-                SEND_STRING(SS_LALT("s"));
+                if(detected_os == OS_LINUX || detected_os == OS_WINDOWS){
+                    SEND_STRING(SS_RALT("s"));
+                }
+                else if(detected_os == OS_MACOS || detected_os == OS_IOS){
+                    SEND_STRING(SS_LALT("s"));
+                }
             }
             break;
         }
@@ -50,7 +61,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                                                                    `----------------+----------------+----------------'   `----------------+----------------+----------------'
 
   ),
-
   [_SYM] = LAYOUT_split_3x5_3(
   //,----------------+----------------+----------------+----------------+----------------+----------------.                                     ,----------------+----------------+----------------+----------------+----------------+----------------.
               XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,                                               KC_RBRC,   LSFT(KC_RBRC),      LSFT(KC_0),         XXXXXXX,   LSFT(KC_BSLS),
