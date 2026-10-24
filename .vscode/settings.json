@@ -53,5 +53,6 @@
             "fileMatch": ["keymap.json"],
             "url": "./data/schemas/keymap.jsonschema"
         }
-    ]
+    ],
+    "idf.pythonInstallPath": "/opt/homebrew/opt/python@3.13/Frameworks/Python.framework/Versions/3.13/bin/python3"
 }
